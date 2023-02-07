@@ -4,7 +4,7 @@ import java.util.*;
 public class Deck {
     public static ArrayList<String> deck = new ArrayList<String>();
     
-    public static int Deal(){
+    public static int Hit(){
         String cardName = deck.get(0);
         int drawnCard = 0;
         switch(cardName){
