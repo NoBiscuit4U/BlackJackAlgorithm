@@ -7,7 +7,7 @@ public class Deck {
     
     public static int Hit(){
         int cardValue = intDeck.get(0);
-        deck.remove(0);
+        intDeck.remove(0);
         return cardValue;
     }
     

@@ -20,19 +20,39 @@ public class DescisionLogic {
         return sum;
     }
 
-    public static double GetPercentChance(ArrayList<Integer> hand){
-        double percent = 0.0;
+    public static float GetPercentChance(ArrayList<Integer> hand){
         int hiddenCard = hand.get(0);
         ArrayList<Integer> copyDeck = Deck.intDeck;
         copyDeck.add(hiddenCard);
+        float cardsLessThanError = 0;
+        for(int i=0; i<Deck.intDeck.size(); i++){
+            if(Deck.intDeck.get(i) <= GetError(hand)){
+                cardsLessThanError +=1;
+            }else{
 
-
+            }
+        }
+        
+        float percent = (cardsLessThanError/Deck.intDeck.size()) * 100;
         return percent;
+    }
+
+    public static void DecideAceValue(ArrayList<Integer> hand){
+        for(int i=0; i<Deck.intDeck.size(); i++){
+            if(Deck.intDeck.get(i) <= GetError(hand)){
+                
+            }
+        }
     }
 
     public static boolean HitOrStand(ArrayList<Integer> hand){
         boolean returnValue = false;
-
+        DecideAceValue(hand);
+        if(GetPercentChance(hand) >= 50){
+            returnValue = true;
+        }else{
+            returnValue = false;
+        }
         return returnValue;
     }
 }

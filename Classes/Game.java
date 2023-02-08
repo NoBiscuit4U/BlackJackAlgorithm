@@ -14,7 +14,6 @@ public class Game {
 
         DescisionLogic.dealerHand.add(Deck.Hit());
         DescisionLogic.dealerHand.add(Deck.Hit());
-        System.out.println(Deck.intDeck);
     }
 
     public static boolean PlayGame(){
@@ -57,6 +56,8 @@ public class Game {
         Deck.CreateAndShuffleDeck();
         Deck.DeckToInt();
         DealOutCards();
+        System.out.println(Deck.intDeck);
+        DescisionLogic.GetPercentChance(DescisionLogic.playerHand);
         PlayGame();
     }
 }
