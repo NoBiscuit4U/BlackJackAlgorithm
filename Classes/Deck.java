@@ -3,47 +3,61 @@ import java.util.*;
 
 public class Deck {
     public static ArrayList<String> deck = new ArrayList<String>();
+    public static ArrayList<Integer> intDeck = new ArrayList<Integer>();
     
     public static int Hit(){
-        String cardName = deck.get(0);
-        int drawnCard = 0;
+        int cardValue = intDeck.get(0);
+        deck.remove(0);
+        return cardValue;
+    }
+    
+    public static ArrayList<Integer> DeckToInt(){
+        for(int i=0; i<deck.size(); i++){
+            int cardInt = CardNameToInt(deck.get(i));
+            intDeck.add(cardInt);
+        }
+
+        return intDeck;
+    }
+
+    public static int CardNameToInt(String cardName){
+        int cardIntValue = 0;
         switch(cardName){
             case "King":
             case "Queen":
             case "Jack":
             case "10":
-            drawnCard = 10;
+            cardIntValue = 10;
             break;
             case "9":
-            drawnCard = 9;
+            cardIntValue = 9;
             break;
             case "8":
-            drawnCard = 8;
+            cardIntValue = 8;
             break;
             case "7":
-            drawnCard = 7;
+            cardIntValue = 7;
             break;
             case "6":
-            drawnCard = 6;
+            cardIntValue = 6;
             break;
             case "5":
-            drawnCard = 5;
+            cardIntValue = 5;
             break;
             case "4":
-            drawnCard = 4;
+            cardIntValue = 4;
             break;
             case "3":
-            drawnCard = 3;
+            cardIntValue = 3;
             break;
             case "2":
-            drawnCard = 2;
+            cardIntValue = 2;
             break;
             case "Ace":
-            drawnCard = 1;
+            cardIntValue = 1;
             break;
         }
-        deck.remove(0);
-        return drawnCard;
+        return cardIntValue;
     }
     
     public static void CreateAndShuffleDeck(){
