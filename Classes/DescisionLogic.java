@@ -38,9 +38,15 @@ public class DescisionLogic {
     }
 
     public static void DecideAceValue(ArrayList<Integer> hand){
-        for(int i=0; i<Deck.intDeck.size(); i++){
-            if(Deck.intDeck.get(i) <= GetError(hand)){
-                
+        for(int i=0; i<hand.size(); i++){
+            if(hand.get(i) == 1){
+                if(Sum(hand) + 10 >= 21){
+
+                }else{
+                    hand.add(10); 
+                }          
+            }else{
+
             }
         }
     }

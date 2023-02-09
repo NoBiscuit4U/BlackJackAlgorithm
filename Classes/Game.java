@@ -19,45 +19,69 @@ public class Game {
     public static boolean PlayGame(){
         boolean returnValue = false;
         while(isGameActive){
-            if(DescisionLogic.Sum(DescisionLogic.playerHand)<=21){
-                while(isPlayersTurn){
+            while(isPlayersTurn){
+                if(DescisionLogic.Sum(DescisionLogic.playerHand)<=21){
                     if(DescisionLogic.HitOrStand(DescisionLogic.playerHand) == true){
+                        System.out.println("Player Hit");
                         DescisionLogic.playerHand.add(Deck.Hit());       
                     }else{
+                        System.out.println("Player Stands");
                         isPlayersTurn = false;
                         isDealersTurn = true;
                     }
+                }else{
+                    System.out.println("Dealer Won");
+                    System.out.println(DescisionLogic.playerHand);
+                    System.out.println(DescisionLogic.dealerHand);
+                    dealerWon = true;
+                    returnValue = true;
+                    isGameActive = false;
                 }
-            }else{
-                dealerWon = true;
-                returnValue = true;
-                isGameActive = false;
             }
             
-            if(DescisionLogic.Sum(DescisionLogic.dealerHand)<=21){
-                while(isDealersTurn){
+            while(isDealersTurn){
+                if(DescisionLogic.Sum(DescisionLogic.dealerHand)<=21){
                     if(DescisionLogic.HitOrStand(DescisionLogic.dealerHand) == true){
+                        System.out.println("Dealer Hit");
                         DescisionLogic.playerHand.add(Deck.Hit());       
                     }else{
-                        isPlayersTurn = false;
-                        isDealersTurn = true;
+                        System.out.println("Dealer Stands");
+                        isDealersTurn = false;
                     }
+                    
+                }else{
+                    System.out.println("Player Won");
+                    System.out.println(DescisionLogic.playerHand);
+                    System.out.println(DescisionLogic.dealerHand);
+                    playerWon = true;
+                    returnValue = true;
+                    isGameActive = false;  
                 }
-    
-            }else{
-                playerWon = true;
-                returnValue = true;
-                isGameActive = false;  
+            }
+
+            if(!isDealersTurn && !isPlayersTurn){
+                if(DescisionLogic.Sum(DescisionLogic.dealerHand) >= DescisionLogic.Sum(DescisionLogic.playerHand)){
+                    System.out.println("Dealer Won");
+                    System.out.println(DescisionLogic.playerHand);
+                    System.out.println(DescisionLogic.dealerHand);
+                    dealerWon = true;
+                    isGameActive = false;
+                }else{
+                    System.out.println("Player Won");
+                    System.out.println(DescisionLogic.playerHand);
+                    System.out.println(DescisionLogic.dealerHand);
+                    playerWon = true;
+                    isGameActive = false;     
+                }
             }
         }
         return returnValue;
     }
+
     public static void StartGame(){
         Deck.CreateAndShuffleDeck();
         Deck.DeckToInt();
         DealOutCards();
-        System.out.println(Deck.intDeck);
-        DescisionLogic.GetPercentChance(DescisionLogic.playerHand);
         PlayGame();
     }
 }
