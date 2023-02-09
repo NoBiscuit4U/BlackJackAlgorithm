@@ -16,12 +16,11 @@ public class Game {
         DescisionLogic.dealerHand.add(Deck.Hit());
     }
 
-    public static boolean PlayGame(){
-        boolean returnValue = false;
+    public static void PlayGame(){
         while(isGameActive){
             while(isPlayersTurn){
                 if(DescisionLogic.Sum(DescisionLogic.playerHand)<=21){
-                    if(DescisionLogic.HitOrStand(DescisionLogic.playerHand) == true){
+                    if(DescisionLogic.HitOrStand(DescisionLogic.playerHand, DescisionLogic.dealerHand) == true){
                         System.out.println("Player Hit");
                         DescisionLogic.playerHand.add(Deck.Hit());       
                     }else{
@@ -31,30 +30,29 @@ public class Game {
                     }
                 }else{
                     System.out.println("Dealer Won");
-                    System.out.println(DescisionLogic.playerHand);
-                    System.out.println(DescisionLogic.dealerHand);
+                    System.out.println("PlayerHand " + DescisionLogic.playerHand);
+                    System.out.println("DealerHand " + DescisionLogic.dealerHand);
                     dealerWon = true;
-                    returnValue = true;
+                    isPlayersTurn = false;
                     isGameActive = false;
                 }
             }
             
             while(isDealersTurn){
                 if(DescisionLogic.Sum(DescisionLogic.dealerHand)<=21){
-                    if(DescisionLogic.HitOrStand(DescisionLogic.dealerHand) == true){
+                    if(DescisionLogic.HitOrStand(DescisionLogic.dealerHand, DescisionLogic.playerHand) == true){
                         System.out.println("Dealer Hit");
-                        DescisionLogic.playerHand.add(Deck.Hit());       
+                        DescisionLogic.dealerHand.add(Deck.Hit());       
                     }else{
                         System.out.println("Dealer Stands");
                         isDealersTurn = false;
-                    }
-                    
+                    }  
                 }else{
                     System.out.println("Player Won");
-                    System.out.println(DescisionLogic.playerHand);
-                    System.out.println(DescisionLogic.dealerHand);
+                    System.out.println("PlayerHand " + DescisionLogic.playerHand);
+                    System.out.println("DealerHand " + DescisionLogic.dealerHand);
                     playerWon = true;
-                    returnValue = true;
+                    isDealersTurn = false;
                     isGameActive = false;  
                 }
             }
@@ -62,20 +60,19 @@ public class Game {
             if(!isDealersTurn && !isPlayersTurn){
                 if(DescisionLogic.Sum(DescisionLogic.dealerHand) >= DescisionLogic.Sum(DescisionLogic.playerHand)){
                     System.out.println("Dealer Won");
-                    System.out.println(DescisionLogic.playerHand);
-                    System.out.println(DescisionLogic.dealerHand);
+                    System.out.println("PlayerHand " + DescisionLogic.playerHand);
+                    System.out.println("DealerHand " + DescisionLogic.dealerHand);
                     dealerWon = true;
                     isGameActive = false;
                 }else{
                     System.out.println("Player Won");
-                    System.out.println(DescisionLogic.playerHand);
-                    System.out.println(DescisionLogic.dealerHand);
+                    System.out.println("PlayerHand " + DescisionLogic.playerHand);
+                    System.out.println("DealerHand " + DescisionLogic.dealerHand);
                     playerWon = true;
                     isGameActive = false;     
                 }
             }
         }
-        return returnValue;
     }
 
     public static void StartGame(){

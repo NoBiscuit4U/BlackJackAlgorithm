@@ -20,8 +20,8 @@ public class DescisionLogic {
         return sum;
     }
 
-    public static float GetPercentChance(ArrayList<Integer> hand){
-        int hiddenCard = hand.get(0);
+    public static float GetPercentChance(ArrayList<Integer> hand, ArrayList<Integer> oppositeHand){
+        int hiddenCard = oppositeHand.get(0);
         ArrayList<Integer> copyDeck = Deck.intDeck;
         copyDeck.add(hiddenCard);
         float cardsLessThanError = 0;
@@ -51,10 +51,10 @@ public class DescisionLogic {
         }
     }
 
-    public static boolean HitOrStand(ArrayList<Integer> hand){
+    public static boolean HitOrStand(ArrayList<Integer> hand, ArrayList<Integer> oppositeHand){
         boolean returnValue = false;
         DecideAceValue(hand);
-        if(GetPercentChance(hand) >= 50){
+        if(GetPercentChance(hand, oppositeHand) >= 50){
             returnValue = true;
         }else{
             returnValue = false;
